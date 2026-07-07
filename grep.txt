@@ -1,0 +1,17 @@
+  Save,
+  Share2,
+  SlidersHorizontal,
+  Trash2,
+  Undo2,
+  Upload,
+} from 'lucide-react';
+import { Tooltip } from './Tooltip';
+--
+          <Tooltip content="Settings" side="bottom">
+<button onClick={onShowShortcuts} className="p-1.5 hover:bg-white/10 rounded transition-colors" >
+            <SlidersHorizontal className="w-4 h-4" />
+          </button>
+</Tooltip>
+          <button 
+             onClick={() => {
+                const canvas = document.querySelector('canvas');
