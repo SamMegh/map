@@ -51,7 +51,7 @@ export const defaultMaps: MapData[] = [
     id: 'tunisia',
     gameId: 'codm',
     name: 'Tunisia',
-    image: './assets/tunisia_base_final_watermark.png-1754374489793.png',
+    image: '/tunisia_base_final_watermark.png-1754374489793.png',
     teams: ['Special Forces', 'Guerrilla Squad'],
     address: 'Tunisia, North Africa',
   supportedModes: ['SND'],
