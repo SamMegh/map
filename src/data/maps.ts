@@ -81,7 +81,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/crash_minimap.webp",
     teams: ["Marines", "OpFor"],
     address: "Basra, Iraq",
-    supportedModes: ["SND", "HP", "DOM", "CTL", "TDM", "LINEUPS"],
+    supportedModes: ["SND", "HP", "DOM", "TDM"],
     objectives: {
       SND_A: { x: 0.41, y: 0.13 },
       SND_B: { x: 0.756, y: 0.58 },
@@ -90,11 +90,11 @@ export const defaultMaps: MapData[] = [
       HP_P3: { x: 0.626, y: 0.58 },
       HP_P4: { x: 0.77, y: 0.17 },
       HP_P5: { x: 0.167, y: 0.84 },
-      DOM_A: { x: 0.3, y: 0.8 },
-      DOM_B: { x: 0.5, y: 0.5 },
-      DOM_C: { x: 0.7, y: 0.2 },
-      CTL_A: { x: 0.4, y: 0.4 },
-      CTL_B: { x: 0.6, y: 0.6 },
+      DOM_A: { x: 0.3, y: 0.73 },
+      DOM_B: { x: 0.43, y: 0.43  },
+      DOM_C: { x: 0.75, y: 0.35 },
+      // CTL_A: { x: 0.4, y: 0.4 },
+      // CTL_B: { x: 0.6, y: 0.6 },
     },
     
     spawns: {
