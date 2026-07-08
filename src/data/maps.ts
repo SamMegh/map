@@ -56,22 +56,23 @@ export const defaultMaps: MapData[] = [
     address: "Coastal Region",
     supportedModes: ["SND"],
     objectives: {
-      SND_A: { x: 0.83, y: 0.58 },
-      SND_B: { x: 0.26, y: 0.72 },
+      SND_A: { x: 0.64, y: 0.3 },
+      SND_B: { x: 0.31, y: 0.31 },
     },
-   spawns: {
-      team1: {
-        x: 0.5867,
-        y: 0.0997,
-        rotation: 0,
-      },
-      team2: {
-        x: 0.4232,
-        y: 0.8993,
-        rotation: 0,
-      },
-    },
-  },
+   
+    spawns: {
+        team1: {
+            x: 0.83,
+            y: 1.74,
+            rotation: 180
+        },
+        team2: {
+            x: 1.1,
+            y: 0.18,
+            rotation: 180
+        }
+    }
+},
   {
     id: "crash",
     gameId: "codm",
@@ -93,10 +94,19 @@ export const defaultMaps: MapData[] = [
       CTL_A: { x: 0.4, y: 0.4 },
       CTL_B: { x: 0.6, y: 0.6 },
     },
+    
     spawns: {
-      team1: { x: 0.2, y: 0.5, rotation: 90 },
-      team2: { x: 0.8, y: 0.5, rotation: 270 },
-    },
+        team1: {
+            x: 0.162,
+            y: 0.71,
+            rotation: 0
+        },
+        team2: {
+            x: 0.808,
+            y: 0.518,
+            rotation: 0
+        }
+    }
   },
   {
     id: "crossfire",
