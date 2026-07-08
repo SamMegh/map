@@ -35,6 +35,7 @@ export interface MapData {
     HP_P2?: MapObjective;
     HP_P3?: MapObjective;
     HP_P4?: MapObjective;
+    HP_P5?: MapObjective;
     DOM_A?: MapObjective;
     DOM_B?: MapObjective;
     DOM_C?: MapObjective;
@@ -82,12 +83,13 @@ export const defaultMaps: MapData[] = [
     address: "Basra, Iraq",
     supportedModes: ["SND", "HP", "DOM", "CTL", "TDM", "LINEUPS"],
     objectives: {
-      SND_A: { x: 0.4, y: 0.3 },
-      SND_B: { x: 0.6, y: 0.7 },
-      HP_P1: { x: 0.5, y: 0.5 },
-      HP_P2: { x: 0.3, y: 0.25 },
-      HP_P3: { x: 0.7, y: 0.8 },
-      HP_P4: { x: 0.65, y: 0.35 },
+      SND_A: { x: 0.41, y: 0.13 },
+      SND_B: { x: 0.756, y: 0.58 },
+      HP_P1: { x: 0.43, y: 0.43 },
+      HP_P2: { x: 0.415, y: 0.13 },
+      HP_P3: { x: 0.626, y: 0.58 },
+      HP_P4: { x: 0.77, y: 0.17 },
+      HP_P5: { x: 0.167, y: 0.84 },
       DOM_A: { x: 0.3, y: 0.8 },
       DOM_B: { x: 0.5, y: 0.5 },
       DOM_C: { x: 0.7, y: 0.2 },
@@ -97,14 +99,14 @@ export const defaultMaps: MapData[] = [
     
     spawns: {
         team1: {
-            x: 0.162,
-            y: 0.71,
-            rotation: 0
+            x: 0.3,
+            y: 1.39,
+            rotation: 270
         },
         team2: {
-            x: 0.808,
-            y: 0.518,
-            rotation: 0
+            x: 1.55,
+            y: 0.95,
+            rotation: 270
         }
     }
   },

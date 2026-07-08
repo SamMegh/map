@@ -1180,7 +1180,7 @@ export function TacMap({
             </Group>
           )}
 
-          {showMapObjectives && gameMode === "HP" && mapObjectives && setMapObjectives && mapObjectives.HP_P1 && mapObjectives.HP_P2 && mapObjectives.HP_P3 && mapObjectives.HP_P4 && (
+          {showMapObjectives && gameMode === "HP" && mapObjectives && setMapObjectives && mapObjectives.HP_P1 && mapObjectives.HP_P2 && mapObjectives.HP_P3 && mapObjectives.HP_P4 && mapObjectives.HP_P5 && (
             <Group>
               <Group
                 x={MAP_WIDTH * mapObjectives.HP_P1.x}
@@ -1258,6 +1258,27 @@ export function TacMap({
                 >
                   <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(236, 72, 153, 0.15)" stroke="#ec4899" strokeWidth={3 * ICON_SCALE} />
                   <Text text="P4" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#ec4899" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
+                </Group>
+              )}
+              {mapObjectives.HP_P5 && (
+                <Group
+                  x={MAP_WIDTH * mapObjectives.HP_P5.x}
+                  y={MAP_HEIGHT * mapObjectives.HP_P5.y}
+                  draggable={!isLocked && tool === "select"}
+                  onDragEnd={(e) => {
+                    if (isLocked) return;
+                    setMapObjectives({
+                      ...mapObjectives,
+                      HP_P5: {
+                        x: e.target.x() / MAP_WIDTH,
+                        y: e.target.y() / MAP_HEIGHT,
+                      },
+                    });
+                    if (onHistoryPush) onHistoryPush();
+                  }}
+                >
+                  <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(256, 1,53, 0.15)" stroke="#ec4899" strokeWidth={3 * ICON_SCALE} />
+                  <Text text="P5" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#ec4899" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
                 </Group>
               )}
             </Group>
