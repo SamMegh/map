@@ -134,11 +134,11 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/firing_range_minimap.webp",
     teams: ["Black Ops", "CDP"],
     address: "Cuba",
-    supportedModes: ["SND", "HP", "DOM", "CTL", "TDM", "LINEUPS"],
+    supportedModes: ["SND", "HP", "DOM", "CTL", "TDM"],
     objectives: {
-      SND_A: { x: 0.35, y: 0.35 },
-      SND_B: { x: 0.65, y: 0.65 },
-      HP_P1: { x: 0.5, y: 0.5 },
+      SND_A: { x: 0.62, y: 0.87 },
+      SND_B: { x: 0.62, y: 0.23 },
+      HP_P1: { x: 0.45, y: 1.257 },
       HP_P2: { x: 0.2, y: 0.7 },
       HP_P3: { x: 0.8, y: 0.3 },
       HP_P4: { x: 0.7, y: 0.8 },
@@ -149,8 +149,8 @@ export const defaultMaps: MapData[] = [
       CTL_B: { x: 0.6, y: 0.7 },
     },
     spawns: {
-      team1: { x: 0.1, y: 0.5, rotation: 90 },
-      team2: { x: 0.9, y: 0.5, rotation: 270 },
+      team1: { x: 0.45, y: 1.257, rotation: 270 },
+      team2: { x: 1.48, y: 0.98, rotation: 270 },
     },
   },
   {
@@ -160,14 +160,14 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/hacienda_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Spain",
-    supportedModes: ["SND"],
+    supportedModes: ["SND","TDM"],
     objectives: {
       SND_A: { x: 0.83, y: 0.58 },
       SND_B: { x: 0.26, y: 0.72 },
     },
     spawns: {
-      team1: { x: 0.45, y: 0.15, rotation: 0 },
-      team2: { x: 0.65, y: 1.78, rotation: 0 },
+      team1: { x: 0.85, y: 0.15, rotation: 0 },
+      team2: { x: 0.15, y: 1.78, rotation: 0 },
     },
   },
   {
@@ -177,14 +177,14 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/hackney_yard_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "London, UK",
-    supportedModes: ["SND"],
+    supportedModes: ["SND","TDM"],
     objectives: {
-      SND_A: { x: 0.83, y: 0.58 },
-      SND_B: { x: 0.26, y: 0.72 },
+      SND_A: { x: 0.5, y: 0.737 },
+      SND_B: { x: 0.4, y: 0.2 },
     },
     spawns: {
-      team1: { x: 0.45, y: 0.15, rotation: 0 },
-      team2: { x: 0.65, y: 1.78, rotation: 0 },
+      team1: { x: 0.4, y: 1.27, rotation: 270 },
+      team2: { x: 1.45, y: 0.65, rotation: 270 },
     },
   },
   {
@@ -211,14 +211,12 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/hijacked_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "International Waters",
-    supportedModes: ["SND"],
+    supportedModes: ["TDM"],
     objectives: {
-      SND_A: { x: 0.83, y: 0.58 },
-      SND_B: { x: 0.26, y: 0.72 },
     },
     spawns: {
-      team1: { x: 0.45, y: 0.15, rotation: 0 },
-      team2: { x: 0.65, y: 1.78, rotation: 0 },
+      team1: { x: 0.35, y: 0.92, rotation: 270 },
+      team2: { x: 1.55, y: 0.92, rotation: 270 },
     },
   },
   {
@@ -228,23 +226,12 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/killhouse_minimap.webp",
     teams: ["SAS", "Spetsnaz"],
     address: "Hereford, UK",
-    supportedModes: ["TDM", "LINEUPS"],
+    supportedModes: ["TDM"],
     objectives: {
-      SND_A: { x: 0.3, y: 0.3 },
-      SND_B: { x: 0.7, y: 0.7 },
-      HP_P1: { x: 0.5, y: 0.5 },
-      HP_P2: { x: 0.2, y: 0.2 },
-      HP_P3: { x: 0.8, y: 0.8 },
-      HP_P4: { x: 0.2, y: 0.8 },
-      DOM_A: { x: 0.2, y: 0.5 },
-      DOM_B: { x: 0.5, y: 0.5 },
-      DOM_C: { x: 0.8, y: 0.5 },
-      CTL_A: { x: 0.5, y: 0.3 },
-      CTL_B: { x: 0.5, y: 0.7 },
     },
     spawns: {
-      team1: { x: 0.1, y: 0.5, rotation: 90 },
-      team2: { x: 0.9, y: 0.5, rotation: 270 },
+      team1: { x: 0.3, y: 0.5, rotation: 270 },
+      team2: { x: 1.55, y: 0.5, rotation: 270 },
     },
   },
   {
@@ -254,14 +241,14 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/meltdown_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Chernobyl, Ukraine",
-    supportedModes: ["SND"],
+    supportedModes: ["SND","TDM"],
     objectives: {
-      SND_A: { x: 0.83, y: 0.58 },
-      SND_B: { x: 0.26, y: 0.72 },
+      SND_A: { x: 0.505, y: 0.25 },
+      SND_B: { x: 0.505, y: 0.9 },
     },
     spawns: {
-      team1: { x: 0.45, y: 0.15, rotation: 0 },
-      team2: { x: 0.65, y: 1.78, rotation: 0 },
+      team1: { x: 0.25, y: 0.85, rotation: 270 },
+      team2: {  x: 1.65, y: 0.78, rotation: 270 },
     },
   },
   {
@@ -271,14 +258,12 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/monastery_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Greece",
-    supportedModes: ["SND"],
+    supportedModes: ["TDM"],
     objectives: {
-      SND_A: { x: 0.83, y: 0.58 },
-      SND_B: { x: 0.26, y: 0.72 },
     },
     spawns: {
-      team1: { x: 0.45, y: 0.15, rotation: 0 },
-      team2: { x: 0.65, y: 1.78, rotation: 0 },
+      team1: { x: 0.37, y: 1.2, rotation: 270 },
+      team2: { x: 1.51, y: 1.2, rotation: 270 },
     },
   },
   {
@@ -288,14 +273,16 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/nuketown_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Nevada Testing Site, USA",
-    supportedModes: ["SND"],
+    supportedModes: ["TDM","HP"],
     objectives: {
-      SND_A: { x: 0.83, y: 0.58 },
-      SND_B: { x: 0.26, y: 0.72 },
+      HP_P1: { x: 0.5, y: 0.23 },
+      HP_P2: { x: 0.63, y: 0.55 },
+      HP_P3: { x: 0.46, y: 0.52 },
+      HP_P4: { x: 0.48, y: 0.7 }
     },
     spawns: {
-      team1: { x: 0.45, y: 0.15, rotation: 0 },
-      team2: { x: 0.65, y: 1.78, rotation: 0 },
+      team1: { x: 0.32, y: 0.88, rotation: 260 },
+      team2: { x:1.5, y: 1.38, rotation: 290 },
     },
   },
   {
