@@ -68,7 +68,7 @@ export function TacMap({
   onHistoryPush,
   stageRef,
 }: TacMapProps) {
-  const ICON_SCALE = 2;
+  const ICON_SCALE = 1.5;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({
@@ -720,7 +720,7 @@ export function TacMap({
                   {renderVisionCone("rgba(234, 32, 39, 0.15)", token.rotation + 180)}
                   <RegularPolygon
                     sides={3}
-                    radius={28 * ICON_SCALE}
+                    radius={24 * ICON_SCALE}
                     fill="#EA2027"
                     stroke={isSelected ? "#FFF" : "#000"}
                     strokeWidth={isSelected ? 3 * ICON_SCALE : 2 * ICON_SCALE}

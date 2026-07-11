@@ -27,16 +27,16 @@ const getInitialTokens = (mapId?: string, gameMode?: string): TokenData[] => {
   const t2Rot = t2Spawn.rotation !== undefined ? t2Spawn.rotation : 270;
 
   return [
-    { id: 'a1', type: 'attacker', x: (t1Spawn.x * w) - 50, y: (t1Spawn.y * h), rotation: t1Rot, label: '1', color: '#ff1100' },
-    { id: 'a2', type: 'attacker', x: (t1Spawn.x * w), y: (t1Spawn.y * h) - 50, rotation: t1Rot, label: '2', color: '#ff1100' },
-    { id: 'a3', type: 'attacker', x: (t1Spawn.x * w), y: (t1Spawn.y * h) + 50, rotation: t1Rot, label: '3', color: '#ff1100' },
-    { id: 'a4', type: 'attacker', x: (t1Spawn.x * w) + 50, y: (t1Spawn.y * h), rotation: t1Rot, label: '4', color: '#ff1100' },
-    { id: 'a5', type: 'attacker', x: (t1Spawn.x * w), y: (t1Spawn.y * h), rotation: t1Rot, label: '5', color: '#ff1100' },
+    { id: 'a1', type: 'attacker', x: (t1Spawn.x * w) + 70, y: (t1Spawn.y * h)+ 50, rotation: t1Rot, label: '1', color: '#ff1100' },
+    { id: 'a2', type: 'attacker', x: (t1Spawn.x * w) +70, y: (t1Spawn.y * h) - 50, rotation: t1Rot, label: '2', color: '#ff1100' },
+    { id: 'a3', type: 'attacker', x: (t1Spawn.x * w) + 0, y: (t1Spawn.y * h) + 80, rotation: t1Rot, label: '3', color: '#ff1100' },
+    { id: 'a4', type: 'attacker', x: (t1Spawn.x * w) + 0, y: (t1Spawn.y * h)- 80, rotation: t1Rot, label: '4', color: '#ff1100' },
+    { id: 'a5', type: 'attacker', x: (t1Spawn.x * w)+ 0, y: (t1Spawn.y * h)+ 0, rotation: t1Rot, label: '5', color: '#ff1100' },
 
-    { id: 'd1', type: 'defender', x: (t2Spawn.x * w) - 50, y: (t2Spawn.y * h), rotation: t2Rot, label: '1', color: '#0055ff' },
-    { id: 'd2', type: 'defender', x: (t2Spawn.x * w), y: (t2Spawn.y * h) - 50, rotation: t2Rot, label: '2', color: '#0055ff' },
-    { id: 'd3', type: 'defender', x: (t2Spawn.x * w), y: (t2Spawn.y * h) + 50, rotation: t2Rot, label: '3', color: '#0055ff' },
-    { id: 'd4', type: 'defender', x: (t2Spawn.x * w) + 50, y: (t2Spawn.y * h), rotation: t2Rot, label: '4', color: '#0055ff' },
+    { id: 'd1', type: 'defender', x: (t2Spawn.x * w) - 70, y: (t2Spawn.y * h) + 50, rotation: t2Rot, label: '1', color: '#0055ff' },
+    { id: 'd2', type: 'defender', x: (t2Spawn.x * w)  - 70, y: (t2Spawn.y * h) - 50, rotation: t2Rot, label: '2', color: '#0055ff' },
+    { id: 'd3', type: 'defender', x: (t2Spawn.x * w) + 0, y: (t2Spawn.y * h) + 80, rotation: t2Rot, label: '3', color: '#0055ff' },
+    { id: 'd4', type: 'defender', x: (t2Spawn.x * w) + 0, y: (t2Spawn.y * h) - 80, rotation: t2Rot, label: '4', color: '#0055ff' },
     { id: 'd5', type: 'defender', x: (t2Spawn.x * w), y: (t2Spawn.y * h), rotation: t2Rot, label: '5', color: '#0055ff' }
   ];
 };
