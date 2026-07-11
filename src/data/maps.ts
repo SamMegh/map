@@ -81,7 +81,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/crash_minimap.webp",
     teams: ["Marines", "OpFor"],
     address: "Basra, Iraq",
-    supportedModes: ["SND", "HP", "DOM", "TDM", "LINEUPS"],
+    supportedModes: ["SND", "HP", "DOM",  "LINEUPS"],
     objectives: {
       SND_A: { x: 0.41, y: 0.13 },
       SND_B: { x: 0.756, y: 0.58 },
@@ -119,12 +119,12 @@ export const defaultMaps: MapData[] = [
     address: "Middle East Desert",
     supportedModes: ["SND", "LINEUPS"],
     objectives: {
-      SND_A: { x: 0.83, y: 0.58 },
-      SND_B: { x: 0.26, y: 0.72 },
+      SND_A: { x:0.5337966134401081, y: 0.43574459596361276 },
+      SND_B: { x: 0.4491070480968691, y: 0.745759893577926 },
     },
     spawns: {
-      team1: { x: 0.45, y: 0.15, rotation: 0 },
-      team2: { x: 0.65, y: 1.78, rotation: 0 },
+      team1: { x: 0.5, y: 1, rotation: 270 },
+      team2: { x: 1.4, y: 0.9, rotation: 200 },
     },
   },
   {
@@ -134,7 +134,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/firing_range_minimap.webp",
     teams: ["Black Ops", "CDP"],
     address: "Cuba",
-    supportedModes: ["SND", "HP", "DOM", "CTL", "TDM", "LINEUPS"],
+    supportedModes: ["SND", "HP", "DOM", "CTL",  "LINEUPS"],
     objectives: {
       SND_A: { x: 0.62, y: 0.87 },
       SND_B: { x: 0.62, y: 0.23 },
@@ -142,11 +142,11 @@ export const defaultMaps: MapData[] = [
       HP_P2: { x: 0.2, y: 0.7 },
       HP_P3: { x: 0.8, y: 0.3 },
       HP_P4: { x: 0.7, y: 0.8 },
-      DOM_A: { x: 0.25, y: 0.75 },
-      DOM_B: { x: 0.5, y: 0.5 },
-      DOM_C: { x: 0.75, y: 0.25 },
-      CTL_A: { x: 0.4, y: 0.3 },
-      CTL_B: { x: 0.6, y: 0.7 },
+      DOM_A: { x: 0.43071021274542937, y: 0.4702203620131158 },
+      DOM_B: { x: 0.5493694823676977,y: 0.6235949401087129 },
+      DOM_C: { x: 0.6863926865743646, y: 0.6059945786879067 },
+      CTL_A: { x: 0.591747792947079, y: 0.7870268675876279 },
+      CTL_B: { x: 0.62, y: 0.23 },
     },
     spawns: {
       team1: { x: 0.45, y: 1.257, rotation: 270 },
@@ -160,7 +160,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/hacienda_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Spain",
-    supportedModes: ["SND","TDM", "LINEUPS"],
+    supportedModes: ["SND", "LINEUPS"],
     objectives: {
       SND_A: { x: 0.83, y: 0.58 },
       SND_B: { x: 0.26, y: 0.72 },
@@ -177,7 +177,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/hackney_yard_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "London, UK",
-    supportedModes: ["SND","TDM", "LINEUPS"],
+    supportedModes: ["SND", "LINEUPS"],
     objectives: {
       SND_A: { x: 0.5, y: 0.737 },
       SND_B: { x: 0.4, y: 0.2 },
@@ -211,7 +211,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/hijacked_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "International Waters",
-    supportedModes: ["TDM", "LINEUPS"],
+    supportedModes: [ "LINEUPS"],
     objectives: {
     },
     spawns: {
@@ -226,7 +226,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/killhouse_minimap.webp",
     teams: ["SAS", "Spetsnaz"],
     address: "Hereford, UK",
-    supportedModes: ["TDM", "LINEUPS"],
+    supportedModes: [ "LINEUPS"],
     objectives: {
     },
     spawns: {
@@ -241,7 +241,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/meltdown_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Chernobyl, Ukraine",
-    supportedModes: ["SND","TDM", "LINEUPS"],
+    supportedModes: ["SND", "LINEUPS"],
     objectives: {
       SND_A: { x: 0.505, y: 0.25 },
       SND_B: { x: 0.505, y: 0.9 },
@@ -258,7 +258,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/monastery_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Greece",
-    supportedModes: ["TDM", "LINEUPS"],
+    supportedModes: [ "LINEUPS"],
     objectives: {
     },
     spawns: {
@@ -273,7 +273,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/nuketown_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Nevada Testing Site, USA",
-    supportedModes: ["TDM","HP", "LINEUPS"],
+    supportedModes: ["HP", "LINEUPS"],
     objectives: {
       HP_P1: { x: 0.5, y: 0.23 },
       HP_P2: { x: 0.63, y: 0.55 },
@@ -292,7 +292,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/oasis_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Dubai, UAE",
-    supportedModes: ["TDM", "LINEUPS"],
+    supportedModes: [ "LINEUPS"],
     objectives: {
     },
     spawns: {
@@ -307,7 +307,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/raid_minimap.webp",
     teams: ["FBI", "Mercs"],
     address: "Hollywood Hills, USA",
-    supportedModes: ["SND", "HP", "DOM", "CTL", "TDM", "LINEUPS"],
+    supportedModes: ["SND", "HP", "DOM", "CTL",  "LINEUPS"],
     objectives: {
       SND_A: { x: 0.7, y: 0.8 },
       SND_B: { x: 0.51, y: 0.22 },
@@ -367,7 +367,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/slums_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Panama",
-    supportedModes: ["SND", "LINEUPS","TDM","HP"],
+    supportedModes: ["SND", "LINEUPS","HP"],
     objectives: {
       SND_A: { x: 0.52, y: 0.18 },
       SND_B: { x: 0.6, y: 0.63 },
@@ -384,7 +384,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/standoff_minimap.webp",
     teams: ["Mercs", "Black Ops"],
     address: "Kyrgyzstan",
-    supportedModes: ["SND", "HP", "DOM", "CTL", "TDM", "LINEUPS"],
+    supportedModes: ["SND", "HP", "DOM", "CTL",  "LINEUPS"],
     objectives: {
       SND_A: { x: 0.43, y: 0.85 },
       SND_B: { x: 0.57, y: 0.58 },
@@ -427,7 +427,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/summit_minimap.webp",
     teams: ["Black Ops", "Spetsnaz"],
     address: "Ural Mountains, USSR",
-    supportedModes: ["SND", "HP", "DOM", "CTL", "TDM", "LINEUPS"],
+    supportedModes: ["SND", "HP", "DOM", "CTL",  "LINEUPS"],
     objectives: {
       SND_A: { x: 0.46, y: 0.75 },
       SND_B: { x: 0.425, y: 0.265 },
@@ -485,7 +485,7 @@ export const defaultMaps: MapData[] = [
     image: "/maps/codm/tunisia_minimap.webp",
     teams: ["Special Forces", "Guerrilla Squad"],
     address: "Tunisia, North Africa",
-    supportedModes: ["SND","TDM", "LINEUPS","HP"],
+    supportedModes: ["SND", "LINEUPS","HP"],
     objectives: {
       SND_A: { x: 0.46, y: 0.85 },
       SND_B: { x: 0.3, y: 0.32 },

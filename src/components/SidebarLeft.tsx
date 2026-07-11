@@ -258,7 +258,7 @@ export function SidebarLeft({ activeTool, setActiveTool, selectedToken, selected
                         <label className="text-[10px] text-neutral-400 w-12">Length</label>
                         <input 
                           type="range" 
-                          min="50" max="500" step="10" 
+                          min="50" max="1000" step="10" 
                           value={selectedToken.visionLength || 425}
                           onChange={e => updateToken(selectedToken.id, { visionLength: parseInt(e.target.value) })}
                           className="w-full h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-blue-500"

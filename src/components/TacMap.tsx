@@ -643,7 +643,6 @@ export function TacMap({
           {tokens.map((token) => {
             const isDraggable = tool === "select" && !isLocked;
             const isSelected = selectedItemIds.includes(token.id) && !isLocked;
-
             const scale = token.scale || 1;
             const fov = token.fov || 90;
             const visionLength = (token.visionLength || 100) * ICON_SCALE;
@@ -696,7 +695,7 @@ export function TacMap({
               );
             };
 
-            const rotHandleDist = 30 * ICON_SCALE;
+            const rotHandleDist = 90 * ICON_SCALE;
             const rotHandleRadius = 12 * ICON_SCALE;
 
             if (token.type === "attacker") {
@@ -1152,6 +1151,7 @@ export function TacMap({
                       y: e.target.y() / MAP_HEIGHT,
                     },
                   });
+                  console.log("SND_A moved to:", e.target.x() / MAP_WIDTH, e.target.y() / MAP_HEIGHT);
                   if (onHistoryPush) onHistoryPush();
                 }}
               >
@@ -1171,6 +1171,7 @@ export function TacMap({
                       y: e.target.y() / MAP_HEIGHT,
                     },
                   });
+                  console.log("SND_B moved to:", e.target.x() / MAP_WIDTH, e.target.y() / MAP_HEIGHT);
                   if (onHistoryPush) onHistoryPush();
                 }}
               >
