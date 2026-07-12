@@ -1181,8 +1181,9 @@ export function TacMap({
             </Group>
           )}
 
-          {showMapObjectives && gameMode === "HP" && mapObjectives && setMapObjectives && mapObjectives.HP_P1 && mapObjectives.HP_P2 && mapObjectives.HP_P3 && mapObjectives.HP_P4 && mapObjectives.HP_P5 && (
+          {showMapObjectives && gameMode === "HP" && mapObjectives && setMapObjectives && (
             <Group>
+                           {mapObjectives.HP_P1 && (
               <Group
                 x={MAP_WIDTH * mapObjectives.HP_P1.x}
                 y={MAP_HEIGHT * mapObjectives.HP_P1.y}
@@ -1202,6 +1203,8 @@ export function TacMap({
                 <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(59, 130, 246, 0.15)" stroke="#3b82f6" strokeWidth={3 * ICON_SCALE} />
                 <Text text="P1" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#3b82f6" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
               </Group>
+                      )}
+              {mapObjectives.HP_P2 && (
               <Group
                 x={MAP_WIDTH * mapObjectives.HP_P2.x}
                 y={MAP_HEIGHT * mapObjectives.HP_P2.y}
@@ -1221,6 +1224,8 @@ export function TacMap({
                 <Rect width={120 * ICON_SCALE} height={90 * ICON_SCALE} x={-60 * ICON_SCALE} y={-45 * ICON_SCALE} fill="rgba(234, 179, 8, 0.15)" stroke="#eab308" strokeWidth={3 * ICON_SCALE} />
                 <Text text="P2" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#eab308" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
               </Group>
+               )}
+              {mapObjectives.HP_P3 && (
               <Group
                 x={MAP_WIDTH * mapObjectives.HP_P3.x}
                 y={MAP_HEIGHT * mapObjectives.HP_P3.y}
@@ -1240,6 +1245,7 @@ export function TacMap({
                 <Rect width={90 * ICON_SCALE} height={120 * ICON_SCALE} x={-45 * ICON_SCALE} y={-60 * ICON_SCALE} fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" strokeWidth={3 * ICON_SCALE} />
                 <Text text="P3" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#10b981" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
               </Group>
+              )}
               {mapObjectives.HP_P4 && (
                 <Group
                   x={MAP_WIDTH * mapObjectives.HP_P4.x}
@@ -1278,7 +1284,7 @@ export function TacMap({
                     if (onHistoryPush) onHistoryPush();
                   }}
                 >
-                  <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(256, 1,53, 0.15)" stroke="#ec4899" strokeWidth={3 * ICON_SCALE} />
+                  <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(256, 1, 53, 0.15)" stroke="#ec4899" strokeWidth={3 * ICON_SCALE} />
                   <Text text="P5" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#ec4899" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
                 </Group>
               )}
