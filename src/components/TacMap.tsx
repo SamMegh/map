@@ -111,7 +111,10 @@ export function TacMap({
     const handleResize = () => {
       if (containerRef.current) {
         setDimensions((prev) => {
-          if (prev.width === window.innerWidth && prev.height === window.innerHeight)
+          if (
+            prev.width === window.innerWidth &&
+            prev.height === window.innerHeight
+          )
             return prev;
           return {
             width: window.innerWidth,
@@ -149,7 +152,8 @@ export function TacMap({
     };
   }, [dimensions, mapX, mapY]);
 
-  const snap = (v: number) => (showGrid ? Math.round(v / gridSize) * gridSize : v);
+  const snap = (v: number) =>
+    showGrid ? Math.round(v / gridSize) * gridSize : v;
 
   const handleMouseDown = (e: any) => {
     const isRightClick = e.evt && e.evt.button === 2;
@@ -167,7 +171,8 @@ export function TacMap({
     if (isLocked) return;
 
     const isMiddleButton = e.evt && e.evt.button === 1;
-    const isBackgroundClick = e.target === e.target.getStage() || e.target.name() === "background";
+    const isBackgroundClick =
+      e.target === e.target.getStage() || e.target.name() === "background";
 
     if (isMiddleButton || (tool === "select" && isBackgroundClick)) {
       setIsPanning(true);
@@ -211,7 +216,9 @@ export function TacMap({
 
     const isTokenSelected = tokens.some((t) => selectedItemIds.includes(t.id));
     const attachedTokenId =
-      isTokenSelected && selectedItemIds.length === 1 ? selectedItemIds[0] : undefined;
+      isTokenSelected && selectedItemIds.length === 1
+        ? selectedItemIds[0]
+        : undefined;
 
     setLines([
       ...lines,
@@ -241,7 +248,10 @@ export function TacMap({
   const handleMouseMove = (e: any) => {
     if (selectionBox) {
       const pos = e.target.getStage().getPointerPosition();
-      if (pos) setSelectionBox((prev) => (prev ? { ...prev, endX: pos.x, endY: pos.y } : null));
+      if (pos)
+        setSelectionBox((prev) =>
+          prev ? { ...prev, endX: pos.x, endY: pos.y } : null,
+        );
       return;
     }
     if (isLocked) return;
@@ -268,7 +278,12 @@ export function TacMap({
 
     if (tool === "pen" || tool === "eraser" || tool === "polygon") {
       lastLine.points = [...lastLine.points, x, y];
-    } else if (tool === "square" || tool === "circle" || tool === "ruler" || tool === "arrow") {
+    } else if (
+      tool === "square" ||
+      tool === "circle" ||
+      tool === "ruler" ||
+      tool === "arrow"
+    ) {
       lastLine.points = [lastLine.points[0], lastLine.points[1], x, y];
     } else if (tool === "text") {
       lastLine.points = [x, y];
@@ -297,19 +312,33 @@ export function TacMap({
 
         const newSelectedIds: string[] = [];
         tokens.forEach((t) => {
-          if (t.x >= rectMinX && t.x <= rectMaxX && t.y >= rectMinY && t.y <= rectMaxY) newSelectedIds.push(t.id);
+          if (
+            t.x >= rectMinX &&
+            t.x <= rectMaxX &&
+            t.y >= rectMinY &&
+            t.y <= rectMaxY
+          )
+            newSelectedIds.push(t.id);
         });
 
         lines.forEach((l) => {
           if (l.points && l.points.length >= 2) {
             const bx = l.points[0];
             const by = l.points[1];
-            if (bx >= rectMinX && bx <= rectMaxX && by >= rectMinY && by <= rectMaxY) newSelectedIds.push(l.id);
+            if (
+              bx >= rectMinX &&
+              bx <= rectMaxX &&
+              by >= rectMinY &&
+              by <= rectMaxY
+            )
+              newSelectedIds.push(l.id);
           }
         });
 
         if (e && e.evt && e.evt.shiftKey) {
-          setSelectedItemIds(Array.from(new Set([...selectedItemIds, ...newSelectedIds])));
+          setSelectedItemIds(
+            Array.from(new Set([...selectedItemIds, ...newSelectedIds])),
+          );
         } else {
           setSelectedItemIds(newSelectedIds);
         }
@@ -379,7 +408,10 @@ export function TacMap({
           y,
           rotation: 0,
           color: color,
-          label: tokenType === "choke" ? `${tokens.filter((t) => t.type === "choke").length + 1}` : undefined,
+          label:
+            tokenType === "choke"
+              ? `${tokens.filter((t) => t.type === "choke").length + 1}`
+              : undefined,
         },
       ]);
       if (onHistoryPush) onHistoryPush();
@@ -395,7 +427,8 @@ export function TacMap({
     if (e.target !== e.currentTarget) return;
     setTokens((prev) =>
       prev.map((t) => {
-        if (t.id === id) return { ...t, x: snap(e.target.x()), y: snap(e.target.y()) };
+        if (t.id === id)
+          return { ...t, x: snap(e.target.x()), y: snap(e.target.y()) };
         return t;
       }),
     );
@@ -408,7 +441,12 @@ export function TacMap({
       gridLines.push(
         <Line
           key={`v${i}`}
-          points={[Math.round(i * actualGridSize) + 0.5, 0, Math.round(i * actualGridSize) + 0.5, MAP_HEIGHT]}
+          points={[
+            Math.round(i * actualGridSize) + 0.5,
+            0,
+            Math.round(i * actualGridSize) + 0.5,
+            MAP_HEIGHT,
+          ]}
           stroke={showGrid ? "#ffffff" : "#333"}
           strokeWidth={1}
           opacity={showGrid ? 0.2 : 0.3}
@@ -419,7 +457,12 @@ export function TacMap({
       gridLines.push(
         <Line
           key={`h${j}`}
-          points={[0, Math.round(j * actualGridSize) + 0.5, MAP_WIDTH, Math.round(j * actualGridSize) + 0.5]}
+          points={[
+            0,
+            Math.round(j * actualGridSize) + 0.5,
+            MAP_WIDTH,
+            Math.round(j * actualGridSize) + 0.5,
+          ]}
           stroke={showGrid ? "#ffffff" : "#333"}
           strokeWidth={1}
           opacity={showGrid ? 0.2 : 0.3}
@@ -449,19 +492,12 @@ export function TacMap({
         onTouchEnd={handleMouseUp}
       >
         <Layer>
-          <Rect width={dimensions.width} height={dimensions.height} fill="#1a1a1a" name="background" />
-          {selectionBox && (
-            <Rect
-              x={Math.min(selectionBox.startX, selectionBox.endX)}
-              y={Math.min(selectionBox.startY, selectionBox.endY)}
-              width={Math.abs(selectionBox.endX - selectionBox.startX)}
-              height={Math.abs(selectionBox.endY - selectionBox.startY)}
-              fill="rgba(0, 161, 255, 0.3)"
-              stroke="#00A1FF"
-              strokeWidth={1}
-              listening={false}
-            />
-          )}
+          <Rect
+            width={dimensions.width}
+            height={dimensions.height}
+            fill="#1a1a1a"
+            name="background"
+          />
         </Layer>
 
         <Layer x={mapX} y={mapY} scaleX={mapScale} scaleY={mapScale}>
@@ -473,11 +509,21 @@ export function TacMap({
           {lines.map((line, i) => {
             const isSelected = selectedItemIds.includes(line.id) && !isLocked;
             const strokeColor = isSelected ? "#3b82f6" : line.color;
-            const strokeWidth = isSelected ? 6 : line.tool === "eraser" ? 20 : 4;
+            const strokeWidth = isSelected
+              ? 6
+              : line.tool === "eraser"
+                ? 20
+                : 4;
 
             const handleInteract = (e: any) => {
               if (tool === "select" && setSelectedItemIds && !isLocked) {
-                setSelectedItemIds(e ? (e.evt.shiftKey ? [...selectedItemIds, line.id] : [line.id]) : [line.id]);
+                setSelectedItemIds(
+                  e
+                    ? e.evt.shiftKey
+                      ? [...selectedItemIds, line.id]
+                      : [line.id]
+                    : [line.id],
+                );
               } else if (tool === "eraser" && !isLocked) {
                 setLines((prev) => prev.filter((l) => l.id !== line.id));
               }
@@ -485,7 +531,10 @@ export function TacMap({
 
             const handleDblClick = () => {
               if (line.tool === "text" && !isLocked) {
-                const newText = window.prompt("Edit text:", line.text || "Text");
+                const newText = window.prompt(
+                  "Edit text:",
+                  line.text || "Text",
+                );
                 if (newText !== null) {
                   const updatedLines = [...lines];
                   updatedLines[i] = { ...line, text: newText };
@@ -533,14 +582,23 @@ export function TacMap({
                 const dy = node.y() - originalY;
                 node.position({ x: originalX, y: originalY });
 
-                if (line.tool === "square" || line.tool === "circle" || line.tool === "arrow" || line.tool === "ruler") {
+                if (
+                  line.tool === "square" ||
+                  line.tool === "circle" ||
+                  line.tool === "arrow" ||
+                  line.tool === "ruler"
+                ) {
                   newPoints[0] += dx;
                   newPoints[1] += dy;
                   if (newPoints.length > 2) {
                     newPoints[2] += dx;
                     newPoints[3] += dy;
                   }
-                } else if (line.tool === "text" || line.tool === "image" || line.tool === "mic") {
+                } else if (
+                  line.tool === "text" ||
+                  line.tool === "image" ||
+                  line.tool === "mic"
+                ) {
                   newPoints[0] += dx;
                   newPoints[1] += dy;
                 } else {
@@ -575,48 +633,144 @@ export function TacMap({
             if (line.tool === "circle") {
               const [x1, y1, x2, y2] = line.points;
               if (x2 === undefined) return null;
-              const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-              return <Circle key={line.id} x={x1} y={y1} radius={radius} {...commonProps} />;
+              const radius = Math.sqrt(
+                Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2),
+              );
+              return (
+                <Circle
+                  key={line.id}
+                  x={x1}
+                  y={y1}
+                  radius={radius}
+                  {...commonProps}
+                />
+              );
             }
 
             if (line.tool === "arrow") {
-              if (line.points.length < 4 || (line.points[0] === line.points[2] && line.points[1] === line.points[3])) return null;
-              return <Arrow key={line.id} x={0} y={0} points={line.points} pointerLength={15} pointerWidth={15} fill={strokeColor} {...commonProps} />;
+              if (
+                line.points.length < 4 ||
+                (line.points[0] === line.points[2] &&
+                  line.points[1] === line.points[3])
+              )
+                return null;
+              return (
+                <Arrow
+                  key={line.id}
+                  x={0}
+                  y={0}
+                  points={line.points}
+                  pointerLength={15}
+                  pointerWidth={15}
+                  fill={strokeColor}
+                  {...commonProps}
+                />
+              );
             }
 
             if (line.tool === "ruler") {
               const [x1, y1, x2, y2] = line.points;
               if (x2 === undefined) return null;
-              const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+              const distance = Math.sqrt(
+                Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2),
+              );
               const distanceInMeters = Math.round(distance / 10);
               const midX = (x1 + x2) / 2;
               const midY = (y1 + y2) / 2;
               return (
-                <Group key={line.id} {...commonProps} stroke={undefined} strokeWidth={undefined}>
-                  <Line points={line.points} stroke={strokeColor} strokeWidth={commonProps.strokeWidth} dash={[10, 5]} />
-                  <Rect x={midX - 25} y={midY - 15} width={50} height={30} fill="#111" cornerRadius={4} opacity={0.8} />
-                  <Text x={midX - 20} y={midY - 8} text={`${distanceInMeters}m`} fontSize={16} fill="white" fontStyle="bold" />
+                <Group
+                  key={line.id}
+                  {...commonProps}
+                  stroke={undefined}
+                  strokeWidth={undefined}
+                >
+                  <Line
+                    points={line.points}
+                    stroke={strokeColor}
+                    strokeWidth={commonProps.strokeWidth}
+                    dash={[10, 5]}
+                  />
+                  <Rect
+                    x={midX - 25}
+                    y={midY - 15}
+                    width={50}
+                    height={30}
+                    fill="#111"
+                    cornerRadius={4}
+                    opacity={0.8}
+                  />
+                  <Text
+                    x={midX - 20}
+                    y={midY - 8}
+                    text={`${distanceInMeters}m`}
+                    fontSize={16}
+                    fill="white"
+                    fontStyle="bold"
+                  />
                 </Group>
               );
             }
 
             if (line.tool === "text") {
-              return <Text key={line.id} x={line.points[0]} y={line.points[1]} text={line.text || "Text"} fontSize={24} fill={strokeColor} {...commonProps} stroke={undefined} strokeWidth={undefined} />;
+              return (
+                <Text
+                  key={line.id}
+                  x={line.points[0]}
+                  y={line.points[1]}
+                  text={line.text || "Text"}
+                  fontSize={24}
+                  fill={strokeColor}
+                  {...commonProps}
+                  stroke={undefined}
+                  strokeWidth={undefined}
+                />
+              );
             }
 
             if (line.tool === "image") {
               return (
-                <Group key={line.id} x={line.points[0]} y={line.points[1]} {...commonProps} stroke={undefined} strokeWidth={undefined}>
-                  <Rect width={100} height={100} fill="#222" stroke={strokeColor} strokeWidth={2} />
-                  <Text x={5} y={40} text="🖼️ Image" fill="white" fontSize={20} />
+                <Group
+                  key={line.id}
+                  x={line.points[0]}
+                  y={line.points[1]}
+                  {...commonProps}
+                  stroke={undefined}
+                  strokeWidth={undefined}
+                >
+                  <Rect
+                    width={100}
+                    height={100}
+                    fill="#222"
+                    stroke={strokeColor}
+                    strokeWidth={2}
+                  />
+                  <Text
+                    x={5}
+                    y={40}
+                    text="🖼️ Image"
+                    fill="white"
+                    fontSize={20}
+                  />
                 </Group>
               );
             }
 
             if (line.tool === "mic") {
               return (
-                <Group key={line.id} x={line.points[0]} y={line.points[1]} {...commonProps} stroke={undefined} strokeWidth={undefined}>
-                  <Circle radius={30} fill="#222" stroke={strokeColor} strokeWidth={2} />
+                <Group
+                  key={line.id}
+                  x={line.points[0]}
+                  y={line.points[1]}
+                  {...commonProps}
+                  stroke={undefined}
+                  strokeWidth={undefined}
+                >
+                  <Circle
+                    radius={30}
+                    fill="#222"
+                    stroke={strokeColor}
+                    strokeWidth={2}
+                  />
                   <Text x={-15} y={-10} text="🎤" fill="white" fontSize={24} />
                 </Group>
               );
@@ -631,7 +785,9 @@ export function TacMap({
                 lineCap="round"
                 lineJoin="round"
                 closed={line.tool === "polygon" && line.points.length > 4}
-                globalCompositeOperation={line.tool === "eraser" ? "destination-out" : "source-over"}
+                globalCompositeOperation={
+                  line.tool === "eraser" ? "destination-out" : "source-over"
+                }
                 hitStrokeWidth={15}
               />
             );
@@ -649,7 +805,13 @@ export function TacMap({
 
             const handleSelect = (e: any) => {
               if (tool === "select" && setSelectedItemIds && !isLocked) {
-                setSelectedItemIds(e ? (e.evt.shiftKey ? [...selectedItemIds, token.id] : [token.id]) : [token.id]);
+                setSelectedItemIds(
+                  e
+                    ? e.evt.shiftKey
+                      ? [...selectedItemIds, token.id]
+                      : [token.id]
+                    : [token.id],
+                );
               } else if (tool === "eraser" && !isLocked) {
                 setTokens((prev) => prev.filter((t) => t.id !== token.id));
               }
@@ -661,7 +823,10 @@ export function TacMap({
               }
             };
 
-            const renderVisionCone = (baseColor: string, rotationOffset: number) => {
+            const renderVisionCone = (
+              baseColor: string,
+              rotationOffset: number,
+            ) => {
               if (token.showCone === false) return null;
               const angleStart = -fov / 2;
               const angleEnd = fov / 2;
@@ -691,6 +856,7 @@ export function TacMap({
                   data={`M 0 0 L ${visionLength * Math.cos((angleStart * Math.PI) / 180)} ${visionLength * Math.sin((angleStart * Math.PI) / 180)} A ${visionLength} ${visionLength} 0 0 1 ${visionLength * Math.cos((angleEnd * Math.PI) / 180)} ${visionLength * Math.sin((angleEnd * Math.PI) / 180)} Z`}
                   fill={fill}
                   rotation={rotationOffset - 90}
+                  listening={false}
                 />
               );
             };
@@ -717,7 +883,10 @@ export function TacMap({
                   onTap={handleSelect}
                   onPointerEnter={handleTokenHover}
                 >
-                  {renderVisionCone("rgba(234, 32, 39, 0.15)", token.rotation + 180)}
+                  {renderVisionCone(
+                    "rgba(234, 32, 39, 0.15)",
+                    token.rotation + 180,
+                  )}
                   <RegularPolygon
                     sides={3}
                     radius={24 * ICON_SCALE}
@@ -739,7 +908,12 @@ export function TacMap({
 
                   {isSelected && (
                     <Group>
-                      <Line points={[0, 0, hx, hy]} stroke="#3b82f6" strokeWidth={2 * ICON_SCALE} dash={[2, 2]} />
+                      <Line
+                        points={[0, 0, hx, hy]}
+                        stroke="#3b82f6"
+                        strokeWidth={2 * ICON_SCALE}
+                        dash={[2, 2]}
+                      />
                       <Circle
                         x={hx}
                         y={hy}
@@ -763,7 +937,11 @@ export function TacMap({
                           e.target.y(rotHandleDist * Math.sin(angle));
                           const newRotation = (angle * 180) / Math.PI - 90;
                           setTokens((prev) =>
-                            prev.map((t) => (t.id === token.id ? { ...t, rotation: newRotation } : t)),
+                            prev.map((t) =>
+                              t.id === token.id
+                                ? { ...t, rotation: newRotation }
+                                : t,
+                            ),
                           );
                         }}
                       />
@@ -814,7 +992,12 @@ export function TacMap({
 
                   {isSelected && (
                     <Group>
-                      <Line points={[0, 0, hx, hy]} stroke="#3b82f6" strokeWidth={2 * ICON_SCALE} dash={[2, 2]} />
+                      <Line
+                        points={[0, 0, hx, hy]}
+                        stroke="#3b82f6"
+                        strokeWidth={2 * ICON_SCALE}
+                        dash={[2, 2]}
+                      />
                       <Circle
                         x={hx}
                         y={hy}
@@ -838,7 +1021,11 @@ export function TacMap({
                           e.target.y(rotHandleDist * Math.sin(angle));
                           const newRotation = (angle * 180) / Math.PI + 90;
                           setTokens((prev) =>
-                            prev.map((t) => (t.id === token.id ? { ...t, rotation: newRotation } : t)),
+                            prev.map((t) =>
+                              t.id === token.id
+                                ? { ...t, rotation: newRotation }
+                                : t,
+                            ),
                           );
                         }}
                       />
@@ -874,7 +1061,10 @@ export function TacMap({
                     fontSize={28 * ICON_SCALE}
                     fontStyle="bold"
                     fill={token.textFill || "#000"}
-                    x={-(token.label?.length || 1) * 3 * ICON_SCALE - 4 * ICON_SCALE}
+                    x={
+                      -(token.label?.length || 1) * 3 * ICON_SCALE -
+                      4 * ICON_SCALE
+                    }
                     y={-11 * ICON_SCALE}
                   />
                 </Group>
@@ -975,9 +1165,25 @@ export function TacMap({
                     stroke={isSelected ? "#3b82f6" : "#000"}
                     strokeWidth={(isSelected ? 3 : 2) * ICON_SCALE}
                   />
-                  <Circle radius={6 * ICON_SCALE} x={-9 * ICON_SCALE} y={-6 * ICON_SCALE} fill="#000" />
-                  <Circle radius={6 * ICON_SCALE} x={9 * ICON_SCALE} y={-6 * ICON_SCALE} fill="#000" />
-                  <Rect width={16 * ICON_SCALE} height={7 * ICON_SCALE} x={-8 * ICON_SCALE} y={6 * ICON_SCALE} fill="#000" />
+                  <Circle
+                    radius={6 * ICON_SCALE}
+                    x={-9 * ICON_SCALE}
+                    y={-6 * ICON_SCALE}
+                    fill="#000"
+                  />
+                  <Circle
+                    radius={6 * ICON_SCALE}
+                    x={9 * ICON_SCALE}
+                    y={-6 * ICON_SCALE}
+                    fill="#000"
+                  />
+                  <Rect
+                    width={16 * ICON_SCALE}
+                    height={7 * ICON_SCALE}
+                    x={-8 * ICON_SCALE}
+                    y={6 * ICON_SCALE}
+                    fill="#000"
+                  />
                   {token.label && (
                     <Text
                       text={token.label}
@@ -992,7 +1198,12 @@ export function TacMap({
               );
             }
 
-            if (token.type === "grenade" || token.type === "smoke" || token.type === "flash" || token.type === "molotov") {
+            if (
+              token.type === "grenade" ||
+              token.type === "smoke" ||
+              token.type === "flash" ||
+              token.type === "molotov"
+            ) {
               if (!showObjectives) return null;
 
               let emoji = "";
@@ -1037,7 +1248,12 @@ export function TacMap({
                     shadowOpacity={0.5}
                     shadowOffsetY={2 * ICON_SCALE}
                   />
-                  <Text text={emoji} fontSize={28 * ICON_SCALE} x={-14 * ICON_SCALE} y={-14 * ICON_SCALE} />
+                  <Text
+                    text={emoji}
+                    fontSize={28 * ICON_SCALE}
+                    x={-14 * ICON_SCALE}
+                    y={-14 * ICON_SCALE}
+                  />
                   {token.label && (
                     <Text
                       text={token.label}
@@ -1077,7 +1293,14 @@ export function TacMap({
                     strokeWidth={2 * ICON_SCALE}
                     cornerRadius={4 * ICON_SCALE}
                   />
-                  <Text text="B" fontSize={28 * ICON_SCALE} fontStyle="900" fill="#ffffff" x={0} y={-4 * ICON_SCALE} />
+                  <Text
+                    text="B"
+                    fontSize={28 * ICON_SCALE}
+                    fontStyle="900"
+                    fill="#ffffff"
+                    x={0}
+                    y={-4 * ICON_SCALE}
+                  />
                   {token.label && (
                     <Text
                       text={token.label}
@@ -1117,7 +1340,14 @@ export function TacMap({
                     strokeWidth={2 * ICON_SCALE}
                     cornerRadius={2 * ICON_SCALE}
                   />
-                  <Text text="B" fontSize={28 * ICON_SCALE} fontStyle="bold" fill="#fff" x={0} y={-4 * ICON_SCALE} />
+                  <Text
+                    text="B"
+                    fontSize={28 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#fff"
+                    x={0}
+                    y={-4 * ICON_SCALE}
+                  />
                   {token.label && (
                     <Text
                       text={token.label}
@@ -1136,126 +1366,292 @@ export function TacMap({
           })}
 
           {/* map objectives markers (2x) */}
-          {showMapObjectives && gameMode === "SND" && mapObjectives && setMapObjectives && mapObjectives.SND_A && mapObjectives.SND_B && (
-            <Group>
-              <Group
-                x={MAP_WIDTH * mapObjectives.SND_A.x}
-                y={MAP_HEIGHT * mapObjectives.SND_A.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    SND_A: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  console.log("SND_A moved to:", e.target.x() / MAP_WIDTH, e.target.y() / MAP_HEIGHT);
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Circle radius={25 * ICON_SCALE} fill="rgba(220, 38, 38, 0.2)" stroke="#ef4444" strokeWidth={3 * ICON_SCALE} />
-                <Text text="A" fontSize={24 * ICON_SCALE} fontStyle="bold" fill="#ef4444" x={-8 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-              <Group
-                x={MAP_WIDTH * mapObjectives.SND_B.x}
-                y={MAP_HEIGHT * mapObjectives.SND_B.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    SND_B: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  console.log("SND_B moved to:", e.target.x() / MAP_WIDTH, e.target.y() / MAP_HEIGHT);
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Circle radius={25 * ICON_SCALE} fill="rgba(220, 38, 38, 0.2)" stroke="#ef4444" strokeWidth={3 * ICON_SCALE} />
-                <Text text="B" fontSize={24 * ICON_SCALE} fontStyle="bold" fill="#ef4444" x={-8 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-            </Group>
-          )}
-
-          {showMapObjectives && gameMode === "HP" && mapObjectives && setMapObjectives && (
-            <Group>
-                           {mapObjectives.HP_P1 && (
-              <Group
-                x={MAP_WIDTH * mapObjectives.HP_P1.x}
-                y={MAP_HEIGHT * mapObjectives.HP_P1.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    HP_P1: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(59, 130, 246, 0.15)" stroke="#3b82f6" strokeWidth={3 * ICON_SCALE} />
-                <Text text="P1" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#3b82f6" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-                      )}
-              {mapObjectives.HP_P2 && (
-              <Group
-                x={MAP_WIDTH * mapObjectives.HP_P2.x}
-                y={MAP_HEIGHT * mapObjectives.HP_P2.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    HP_P2: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Rect width={120 * ICON_SCALE} height={90 * ICON_SCALE} x={-60 * ICON_SCALE} y={-45 * ICON_SCALE} fill="rgba(234, 179, 8, 0.15)" stroke="#eab308" strokeWidth={3 * ICON_SCALE} />
-                <Text text="P2" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#eab308" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-               )}
-              {mapObjectives.HP_P3 && (
-              <Group
-                x={MAP_WIDTH * mapObjectives.HP_P3.x}
-                y={MAP_HEIGHT * mapObjectives.HP_P3.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    HP_P3: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Rect width={90 * ICON_SCALE} height={120 * ICON_SCALE} x={-45 * ICON_SCALE} y={-60 * ICON_SCALE} fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" strokeWidth={3 * ICON_SCALE} />
-                <Text text="P3" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#10b981" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-              )}
-              {mapObjectives.HP_P4 && (
+          {showMapObjectives &&
+            gameMode === "SND" &&
+            mapObjectives &&
+            setMapObjectives &&
+            mapObjectives.SND_A &&
+            mapObjectives.SND_B && (
+              <Group>
                 <Group
-                  x={MAP_WIDTH * mapObjectives.HP_P4.x}
-                  y={MAP_HEIGHT * mapObjectives.HP_P4.y}
+                  x={MAP_WIDTH * mapObjectives.SND_A.x}
+                  y={MAP_HEIGHT * mapObjectives.SND_A.y}
                   draggable={!isLocked && tool === "select"}
                   onDragEnd={(e) => {
                     if (isLocked) return;
                     setMapObjectives({
                       ...mapObjectives,
-                      HP_P4: {
+                      SND_A: {
+                        x: e.target.x() / MAP_WIDTH,
+                        y: e.target.y() / MAP_HEIGHT,
+                      },
+                    });
+                    console.log(
+                      "SND_A moved to:",
+                      e.target.x() / MAP_WIDTH,
+                      e.target.y() / MAP_HEIGHT,
+                    );
+                    if (onHistoryPush) onHistoryPush();
+                  }}
+                >
+                  <Circle
+                    radius={25 * ICON_SCALE}
+                    fill="rgba(220, 38, 38, 0.2)"
+                    stroke="#ef4444"
+                    strokeWidth={3 * ICON_SCALE}
+                  />
+                  <Text
+                    text="A"
+                    fontSize={24 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#ef4444"
+                    x={-8 * ICON_SCALE}
+                    y={-10 * ICON_SCALE}
+                  />
+                </Group>
+                <Group
+                  x={MAP_WIDTH * mapObjectives.SND_B.x}
+                  y={MAP_HEIGHT * mapObjectives.SND_B.y}
+                  draggable={!isLocked && tool === "select"}
+                  onDragEnd={(e) => {
+                    if (isLocked) return;
+                    setMapObjectives({
+                      ...mapObjectives,
+                      SND_B: {
+                        x: e.target.x() / MAP_WIDTH,
+                        y: e.target.y() / MAP_HEIGHT,
+                      },
+                    });
+                    console.log(
+                      "SND_B moved to:",
+                      e.target.x() / MAP_WIDTH,
+                      e.target.y() / MAP_HEIGHT,
+                    );
+                    if (onHistoryPush) onHistoryPush();
+                  }}
+                >
+                  <Circle
+                    radius={25 * ICON_SCALE}
+                    fill="rgba(220, 38, 38, 0.2)"
+                    stroke="#ef4444"
+                    strokeWidth={3 * ICON_SCALE}
+                  />
+                  <Text
+                    text="B"
+                    fontSize={24 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#ef4444"
+                    x={-8 * ICON_SCALE}
+                    y={-10 * ICON_SCALE}
+                  />
+                </Group>
+              </Group>
+            )}
+
+          {showMapObjectives &&
+            gameMode === "HP" &&
+            mapObjectives &&
+            setMapObjectives && (
+              <Group>
+                {mapObjectives.HP_P1 && (
+                  <Group
+                    x={MAP_WIDTH * mapObjectives.HP_P1.x}
+                    y={MAP_HEIGHT * mapObjectives.HP_P1.y}
+                    draggable={!isLocked && tool === "select"}
+                    onDragEnd={(e) => {
+                      if (isLocked) return;
+                      setMapObjectives({
+                        ...mapObjectives,
+                        HP_P1: {
+                          x: e.target.x() / MAP_WIDTH,
+                          y: e.target.y() / MAP_HEIGHT,
+                        },
+                      });
+                      if (onHistoryPush) onHistoryPush();
+                    }}
+                  >
+                    <Rect
+                      width={100 * ICON_SCALE}
+                      height={100 * ICON_SCALE}
+                      x={-50 * ICON_SCALE}
+                      y={-50 * ICON_SCALE}
+                      fill="rgba(59, 130, 246, 0.15)"
+                      stroke="#3b82f6"
+                      strokeWidth={3 * ICON_SCALE}
+                    />
+                    <Text
+                      text="P1"
+                      fontSize={20 * ICON_SCALE}
+                      fontStyle="bold"
+                      fill="#3b82f6"
+                      x={-11 * ICON_SCALE}
+                      y={-10 * ICON_SCALE}
+                    />
+                  </Group>
+                )}
+                {mapObjectives.HP_P2 && (
+                  <Group
+                    x={MAP_WIDTH * mapObjectives.HP_P2.x}
+                    y={MAP_HEIGHT * mapObjectives.HP_P2.y}
+                    draggable={!isLocked && tool === "select"}
+                    onDragEnd={(e) => {
+                      if (isLocked) return;
+                      setMapObjectives({
+                        ...mapObjectives,
+                        HP_P2: {
+                          x: e.target.x() / MAP_WIDTH,
+                          y: e.target.y() / MAP_HEIGHT,
+                        },
+                      });
+                      if (onHistoryPush) onHistoryPush();
+                    }}
+                  >
+                    <Rect
+                      width={120 * ICON_SCALE}
+                      height={90 * ICON_SCALE}
+                      x={-60 * ICON_SCALE}
+                      y={-45 * ICON_SCALE}
+                      fill="rgba(234, 179, 8, 0.15)"
+                      stroke="#eab308"
+                      strokeWidth={3 * ICON_SCALE}
+                    />
+                    <Text
+                      text="P2"
+                      fontSize={20 * ICON_SCALE}
+                      fontStyle="bold"
+                      fill="#eab308"
+                      x={-11 * ICON_SCALE}
+                      y={-10 * ICON_SCALE}
+                    />
+                  </Group>
+                )}
+                {mapObjectives.HP_P3 && (
+                  <Group
+                    x={MAP_WIDTH * mapObjectives.HP_P3.x}
+                    y={MAP_HEIGHT * mapObjectives.HP_P3.y}
+                    draggable={!isLocked && tool === "select"}
+                    onDragEnd={(e) => {
+                      if (isLocked) return;
+                      setMapObjectives({
+                        ...mapObjectives,
+                        HP_P3: {
+                          x: e.target.x() / MAP_WIDTH,
+                          y: e.target.y() / MAP_HEIGHT,
+                        },
+                      });
+                      if (onHistoryPush) onHistoryPush();
+                    }}
+                  >
+                    <Rect
+                      width={90 * ICON_SCALE}
+                      height={120 * ICON_SCALE}
+                      x={-45 * ICON_SCALE}
+                      y={-60 * ICON_SCALE}
+                      fill="rgba(16, 185, 129, 0.15)"
+                      stroke="#10b981"
+                      strokeWidth={3 * ICON_SCALE}
+                    />
+                    <Text
+                      text="P3"
+                      fontSize={20 * ICON_SCALE}
+                      fontStyle="bold"
+                      fill="#10b981"
+                      x={-11 * ICON_SCALE}
+                      y={-10 * ICON_SCALE}
+                    />
+                  </Group>
+                )}
+                {mapObjectives.HP_P4 && (
+                  <Group
+                    x={MAP_WIDTH * mapObjectives.HP_P4.x}
+                    y={MAP_HEIGHT * mapObjectives.HP_P4.y}
+                    draggable={!isLocked && tool === "select"}
+                    onDragEnd={(e) => {
+                      if (isLocked) return;
+                      setMapObjectives({
+                        ...mapObjectives,
+                        HP_P4: {
+                          x: e.target.x() / MAP_WIDTH,
+                          y: e.target.y() / MAP_HEIGHT,
+                        },
+                      });
+                      if (onHistoryPush) onHistoryPush();
+                    }}
+                  >
+                    <Rect
+                      width={100 * ICON_SCALE}
+                      height={100 * ICON_SCALE}
+                      x={-50 * ICON_SCALE}
+                      y={-50 * ICON_SCALE}
+                      fill="rgba(236, 72, 153, 0.15)"
+                      stroke="#ec4899"
+                      strokeWidth={3 * ICON_SCALE}
+                    />
+                    <Text
+                      text="P4"
+                      fontSize={20 * ICON_SCALE}
+                      fontStyle="bold"
+                      fill="#ec4899"
+                      x={-11 * ICON_SCALE}
+                      y={-10 * ICON_SCALE}
+                    />
+                  </Group>
+                )}
+                {mapObjectives.HP_P5 && (
+                  <Group
+                    x={MAP_WIDTH * mapObjectives.HP_P5.x}
+                    y={MAP_HEIGHT * mapObjectives.HP_P5.y}
+                    draggable={!isLocked && tool === "select"}
+                    onDragEnd={(e) => {
+                      if (isLocked) return;
+                      setMapObjectives({
+                        ...mapObjectives,
+                        HP_P5: {
+                          x: e.target.x() / MAP_WIDTH,
+                          y: e.target.y() / MAP_HEIGHT,
+                        },
+                      });
+                      if (onHistoryPush) onHistoryPush();
+                    }}
+                  >
+                    <Rect
+                      width={100 * ICON_SCALE}
+                      height={100 * ICON_SCALE}
+                      x={-50 * ICON_SCALE}
+                      y={-50 * ICON_SCALE}
+                      fill="rgba(256, 1, 53, 0.15)"
+                      stroke="#ec4899"
+                      strokeWidth={3 * ICON_SCALE}
+                    />
+                    <Text
+                      text="P5"
+                      fontSize={20 * ICON_SCALE}
+                      fontStyle="bold"
+                      fill="#ec4899"
+                      x={-11 * ICON_SCALE}
+                      y={-10 * ICON_SCALE}
+                    />
+                  </Group>
+                )}
+              </Group>
+            )}
+
+          {showMapObjectives &&
+            gameMode === "CTL" &&
+            mapObjectives &&
+            setMapObjectives &&
+            mapObjectives.CTL_A &&
+            mapObjectives.CTL_B && (
+              <Group>
+                <Group
+                  x={MAP_WIDTH * mapObjectives.CTL_A.x}
+                  y={MAP_HEIGHT * mapObjectives.CTL_A.y}
+                  draggable={!isLocked && tool === "select"}
+                  onDragEnd={(e) => {
+                    if (isLocked) return;
+                    setMapObjectives({
+                      ...mapObjectives,
+                      CTL_A: {
                         x: e.target.x() / MAP_WIDTH,
                         y: e.target.y() / MAP_HEIGHT,
                       },
@@ -1263,20 +1659,30 @@ export function TacMap({
                     if (onHistoryPush) onHistoryPush();
                   }}
                 >
-                  <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(236, 72, 153, 0.15)" stroke="#ec4899" strokeWidth={3 * ICON_SCALE} />
-                  <Text text="P4" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#ec4899" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
+                  <Circle
+                    radius={30 * ICON_SCALE}
+                    fill="rgba(168, 85, 247, 0.2)"
+                    stroke="#a855f7"
+                    strokeWidth={3 * ICON_SCALE}
+                  />
+                  <Text
+                    text="A"
+                    fontSize={24 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#a855f7"
+                    x={-8 * ICON_SCALE}
+                    y={-10 * ICON_SCALE}
+                  />
                 </Group>
-              )}
-              {mapObjectives.HP_P5 && (
                 <Group
-                  x={MAP_WIDTH * mapObjectives.HP_P5.x}
-                  y={MAP_HEIGHT * mapObjectives.HP_P5.y}
+                  x={MAP_WIDTH * mapObjectives.CTL_B.x}
+                  y={MAP_HEIGHT * mapObjectives.CTL_B.y}
                   draggable={!isLocked && tool === "select"}
                   onDragEnd={(e) => {
                     if (isLocked) return;
                     setMapObjectives({
                       ...mapObjectives,
-                      HP_P5: {
+                      CTL_B: {
                         x: e.target.x() / MAP_WIDTH,
                         y: e.target.y() / MAP_HEIGHT,
                       },
@@ -1284,121 +1690,147 @@ export function TacMap({
                     if (onHistoryPush) onHistoryPush();
                   }}
                 >
-                  <Rect width={100 * ICON_SCALE} height={100 * ICON_SCALE} x={-50 * ICON_SCALE} y={-50 * ICON_SCALE} fill="rgba(256, 1, 53, 0.15)" stroke="#ec4899" strokeWidth={3 * ICON_SCALE} />
-                  <Text text="P5" fontSize={20 * ICON_SCALE} fontStyle="bold" fill="#ec4899" x={-11 * ICON_SCALE} y={-10 * ICON_SCALE} />
+                  <Circle
+                    radius={30 * ICON_SCALE}
+                    fill="rgba(168, 85, 247, 0.2)"
+                    stroke="#a855f7"
+                    strokeWidth={3 * ICON_SCALE}
+                  />
+                  <Text
+                    text="B"
+                    fontSize={24 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#a855f7"
+                    x={-8 * ICON_SCALE}
+                    y={-10 * ICON_SCALE}
+                  />
                 </Group>
-              )}
-            </Group>
-          )}
+              </Group>
+            )}
 
-          {showMapObjectives && gameMode === "CTL" && mapObjectives && setMapObjectives && mapObjectives.CTL_A && mapObjectives.CTL_B && (
-            <Group>
-              <Group
-                x={MAP_WIDTH * mapObjectives.CTL_A.x}
-                y={MAP_HEIGHT * mapObjectives.CTL_A.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    CTL_A: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Circle radius={30 * ICON_SCALE} fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" strokeWidth={3 * ICON_SCALE} />
-                <Text text="A" fontSize={24 * ICON_SCALE} fontStyle="bold" fill="#a855f7" x={-8 * ICON_SCALE} y={-10 * ICON_SCALE} />
+          {showMapObjectives &&
+            gameMode === "DOM" &&
+            mapObjectives &&
+            setMapObjectives &&
+            mapObjectives.DOM_A &&
+            mapObjectives.DOM_B &&
+            mapObjectives.DOM_C && (
+              <Group>
+                <Group
+                  x={MAP_WIDTH * mapObjectives.DOM_A.x}
+                  y={MAP_HEIGHT * mapObjectives.DOM_A.y}
+                  draggable={!isLocked && tool === "select"}
+                  onDragEnd={(e) => {
+                    if (isLocked) return;
+                    setMapObjectives({
+                      ...mapObjectives,
+                      DOM_A: {
+                        x: e.target.x() / MAP_WIDTH,
+                        y: e.target.y() / MAP_HEIGHT,
+                      },
+                    });
+                    if (onHistoryPush) onHistoryPush();
+                  }}
+                >
+                  <Circle
+                    radius={25 * ICON_SCALE}
+                    fill="rgba(255, 255, 255, 0.2)"
+                    stroke="#ffffff"
+                    strokeWidth={3 * ICON_SCALE}
+                  />
+                  <Text
+                    text="A"
+                    fontSize={24 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#ffffff"
+                    x={-8 * ICON_SCALE}
+                    y={-10 * ICON_SCALE}
+                  />
+                </Group>
+                <Group
+                  x={MAP_WIDTH * mapObjectives.DOM_B.x}
+                  y={MAP_HEIGHT * mapObjectives.DOM_B.y}
+                  draggable={!isLocked && tool === "select"}
+                  onDragEnd={(e) => {
+                    if (isLocked) return;
+                    setMapObjectives({
+                      ...mapObjectives,
+                      DOM_B: {
+                        x: e.target.x() / MAP_WIDTH,
+                        y: e.target.y() / MAP_HEIGHT,
+                      },
+                    });
+                    if (onHistoryPush) onHistoryPush();
+                  }}
+                >
+                  <Circle
+                    radius={25 * ICON_SCALE}
+                    fill="rgba(255, 255, 255, 0.2)"
+                    stroke="#ffffff"
+                    strokeWidth={3 * ICON_SCALE}
+                  />
+                  <Text
+                    text="B"
+                    fontSize={24 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#ffffff"
+                    x={-8 * ICON_SCALE}
+                    y={-10 * ICON_SCALE}
+                  />
+                </Group>
+                <Group
+                  x={MAP_WIDTH * mapObjectives.DOM_C.x}
+                  y={MAP_HEIGHT * mapObjectives.DOM_C.y}
+                  draggable={!isLocked && tool === "select"}
+                  onDragEnd={(e) => {
+                    if (isLocked) return;
+                    setMapObjectives({
+                      ...mapObjectives,
+                      DOM_C: {
+                        x: e.target.x() / MAP_WIDTH,
+                        y: e.target.y() / MAP_HEIGHT,
+                      },
+                    });
+                    if (onHistoryPush) onHistoryPush();
+                  }}
+                >
+                  <Circle
+                    radius={25 * ICON_SCALE}
+                    fill="rgba(255, 255, 255, 0.2)"
+                    stroke="#ffffff"
+                    strokeWidth={3 * ICON_SCALE}
+                  />
+                  <Text
+                    text="C"
+                    fontSize={24 * ICON_SCALE}
+                    fontStyle="bold"
+                    fill="#ffffff"
+                    x={-8 * ICON_SCALE}
+                    y={-10 * ICON_SCALE}
+                  />
+                </Group>
               </Group>
-              <Group
-                x={MAP_WIDTH * mapObjectives.CTL_B.x}
-                y={MAP_HEIGHT * mapObjectives.CTL_B.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    CTL_B: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Circle radius={30 * ICON_SCALE} fill="rgba(168, 85, 247, 0.2)" stroke="#a855f7" strokeWidth={3 * ICON_SCALE} />
-                <Text text="B" fontSize={24 * ICON_SCALE} fontStyle="bold" fill="#a855f7" x={-8 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-            </Group>
-          )}
+            )}
+        </Layer>
 
-          {showMapObjectives && gameMode === "DOM" && mapObjectives && setMapObjectives && mapObjectives.DOM_A && mapObjectives.DOM_B && mapObjectives.DOM_C && (
-            <Group>
-              <Group
-                x={MAP_WIDTH * mapObjectives.DOM_A.x}
-                y={MAP_HEIGHT * mapObjectives.DOM_A.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    DOM_A: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Circle radius={25 * ICON_SCALE} fill="rgba(255, 255, 255, 0.2)" stroke="#ffffff" strokeWidth={3 * ICON_SCALE} />
-                <Text text="A" fontSize={24 * ICON_SCALE} fontStyle="bold" fill="#ffffff" x={-8 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-              <Group
-                x={MAP_WIDTH * mapObjectives.DOM_B.x}
-                y={MAP_HEIGHT * mapObjectives.DOM_B.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    DOM_B: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Circle radius={25 * ICON_SCALE} fill="rgba(255, 255, 255, 0.2)" stroke="#ffffff" strokeWidth={3 * ICON_SCALE} />
-                <Text text="B" fontSize={24 * ICON_SCALE} fontStyle="bold" fill="#ffffff" x={-8 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-              <Group
-                x={MAP_WIDTH * mapObjectives.DOM_C.x}
-                y={MAP_HEIGHT * mapObjectives.DOM_C.y}
-                draggable={!isLocked && tool === "select"}
-                onDragEnd={(e) => {
-                  if (isLocked) return;
-                  setMapObjectives({
-                    ...mapObjectives,
-                    DOM_C: {
-                      x: e.target.x() / MAP_WIDTH,
-                      y: e.target.y() / MAP_HEIGHT,
-                    },
-                  });
-                  if (onHistoryPush) onHistoryPush();
-                }}
-              >
-                <Circle radius={25 * ICON_SCALE} fill="rgba(255, 255, 255, 0.2)" stroke="#ffffff" strokeWidth={3 * ICON_SCALE} />
-                <Text text="C" fontSize={24 * ICON_SCALE} fontStyle="bold" fill="#ffffff" x={-8 * ICON_SCALE} y={-10 * ICON_SCALE} />
-              </Group>
-            </Group>
+        {/* Topmost overlay layer for selection box so it renders on top of the map and player tokens */}
+        <Layer listening={false}>
+          {selectionBox && (
+            <Rect
+              x={Math.min(selectionBox.startX, selectionBox.endX)}
+              y={Math.min(selectionBox.startY, selectionBox.endY)}
+              width={Math.abs(selectionBox.endX - selectionBox.startX)}
+              height={Math.abs(selectionBox.endY - selectionBox.startY)}
+              fill="rgba(0, 161, 255, 0.25)"
+              stroke="#00A1FF"
+              strokeWidth={1.5}
+              listening={false}
+            />
           )}
         </Layer>
       </Stage>
 
-      <div className="absolute bottom-6 right-6 flex flex-col gap-2 bg-[#1a1a1a]/80 backdrop-blur-sm p-2 rounded-lg border border-white/10 z-10 shadow-lg">
+      <div className="absolute bottom-3 right-3 flex  gap-2     z-10  ">
         <Tooltip content="Zoom In (Ctrl + =)" side="left">
           <button
             onClick={() => {
@@ -1412,7 +1844,7 @@ export function TacMap({
             }}
             className="p-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded transition-colors"
           >
-            <ZoomIn className="w-5 h-5" />
+            <ZoomIn className="w-4 h-4" />
           </button>
         </Tooltip>
         <Tooltip content="Reset View" side="left">
@@ -1423,7 +1855,7 @@ export function TacMap({
             }}
             className="p-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded transition-colors"
           >
-            <Maximize className="w-5 h-5" />
+            <Maximize className="w-4 h-4" />
           </button>
         </Tooltip>
         <Tooltip content="Zoom Out (Ctrl + -)" side="left">
@@ -1439,11 +1871,10 @@ export function TacMap({
             }}
             className="p-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded transition-colors"
           >
-            <ZoomOut className="w-5 h-5" />
+            <ZoomOut className="w-4 h-4" />
           </button>
         </Tooltip>
       </div>
     </div>
   );
 }
-

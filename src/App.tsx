@@ -26,18 +26,43 @@ const getInitialTokens = (mapId?: string, gameMode?: string): TokenData[] => {
   const t1Rot = t1Spawn.rotation !== undefined ? t1Spawn.rotation : 90;
   const t2Rot = t2Spawn.rotation !== undefined ? t2Spawn.rotation : 270;
 
-  return [
-    { id: 'a1', type: 'attacker', x: (t1Spawn.x * w) + 70, y: (t1Spawn.y * h)+ 50, rotation: t1Rot, label: '1', color: '#ff1100' },
-    { id: 'a2', type: 'attacker', x: (t1Spawn.x * w) +70, y: (t1Spawn.y * h) - 50, rotation: t1Rot, label: '2', color: '#ff1100' },
-    { id: 'a3', type: 'attacker', x: (t1Spawn.x * w) + 0, y: (t1Spawn.y * h) + 80, rotation: t1Rot, label: '3', color: '#ff1100' },
-    { id: 'a4', type: 'attacker', x: (t1Spawn.x * w) + 0, y: (t1Spawn.y * h)- 80, rotation: t1Rot, label: '4', color: '#ff1100' },
-    { id: 'a5', type: 'attacker', x: (t1Spawn.x * w)+ 0, y: (t1Spawn.y * h)+ 0, rotation: t1Rot, label: '5', color: '#ff1100' },
+  // Helper to rotate offsets around (0, 0)
+  const getRotatedOffset = (dx: number, dy: number, angleDegrees: number, baseAngle: number) => {
+    const angleRad = ((angleDegrees - baseAngle) * Math.PI) / 180;
+    const cos = Math.cos(angleRad);
+    const sin = Math.sin(angleRad);
+    return {
+      x: dx * cos - dy * sin,
+      y: dx * sin + dy * cos
+    };
+  };
 
-    { id: 'd1', type: 'defender', x: (t2Spawn.x * w) - 70, y: (t2Spawn.y * h) + 50, rotation: t2Rot, label: '1', color: '#0055ff' },
-    { id: 'd2', type: 'defender', x: (t2Spawn.x * w)  - 70, y: (t2Spawn.y * h) - 50, rotation: t2Rot, label: '2', color: '#0055ff' },
-    { id: 'd3', type: 'defender', x: (t2Spawn.x * w) + 0, y: (t2Spawn.y * h) + 80, rotation: t2Rot, label: '3', color: '#0055ff' },
-    { id: 'd4', type: 'defender', x: (t2Spawn.x * w) + 0, y: (t2Spawn.y * h) - 80, rotation: t2Rot, label: '4', color: '#0055ff' },
-    { id: 'd5', type: 'defender', x: (t2Spawn.x * w), y: (t2Spawn.y * h), rotation: t2Rot, label: '5', color: '#0055ff' }
+  // Base attacker offsets assuming t1Rot = 90
+  const a1Offset = getRotatedOffset(70, 50, t1Rot, 90);
+  const a2Offset = getRotatedOffset(70, -50, t1Rot, 90);
+  const a3Offset = getRotatedOffset(0, 80, t1Rot, 90);
+  const a4Offset = getRotatedOffset(0, -80, t1Rot, 90);
+  const a5Offset = getRotatedOffset(0, 0, t1Rot, 90);
+
+  // Base defender offsets assuming t2Rot = 270
+  const d1Offset = getRotatedOffset(-70, 50, t2Rot, 270);
+  const d2Offset = getRotatedOffset(-70, -50, t2Rot, 270);
+  const d3Offset = getRotatedOffset(0, 80, t2Rot, 270);
+  const d4Offset = getRotatedOffset(0, -80, t2Rot, 270);
+  const d5Offset = getRotatedOffset(0, 0, t2Rot, 270);
+
+  return [
+    { id: 'a1', type: 'attacker', x: (t1Spawn.x * w) + a1Offset.x, y: (t1Spawn.y * h) + a1Offset.y, rotation: t1Rot, label: '1', color: '#ff1100' },
+    { id: 'a2', type: 'attacker', x: (t1Spawn.x * w) + a2Offset.x, y: (t1Spawn.y * h) + a2Offset.y, rotation: t1Rot, label: '2', color: '#ff1100' },
+    { id: 'a3', type: 'attacker', x: (t1Spawn.x * w) + a3Offset.x, y: (t1Spawn.y * h) + a3Offset.y, rotation: t1Rot, label: '3', color: '#ff1100' },
+    { id: 'a4', type: 'attacker', x: (t1Spawn.x * w) + a4Offset.x, y: (t1Spawn.y * h) + a4Offset.y, rotation: t1Rot, label: '4', color: '#ff1100' },
+    { id: 'a5', type: 'attacker', x: (t1Spawn.x * w) + a5Offset.x, y: (t1Spawn.y * h) + a5Offset.y, rotation: t1Rot, label: '5', color: '#ff1100' },
+
+    { id: 'd1', type: 'defender', x: (t2Spawn.x * w) + d1Offset.x, y: (t2Spawn.y * h) + d1Offset.y, rotation: t2Rot, label: '1', color: '#0055ff' },
+    { id: 'd2', type: 'defender', x: (t2Spawn.x * w) + d2Offset.x, y: (t2Spawn.y * h) + d2Offset.y, rotation: t2Rot, label: '2', color: '#0055ff' },
+    { id: 'd3', type: 'defender', x: (t2Spawn.x * w) + d3Offset.x, y: (t2Spawn.y * h) + d3Offset.y, rotation: t2Rot, label: '3', color: '#0055ff' },
+    { id: 'd4', type: 'defender', x: (t2Spawn.x * w) + d4Offset.x, y: (t2Spawn.y * h) + d4Offset.y, rotation: t2Rot, label: '4', color: '#0055ff' },
+    { id: 'd5', type: 'defender', x: (t2Spawn.x * w) + d5Offset.x, y: (t2Spawn.y * h) + d5Offset.y, rotation: t2Rot, label: '5', color: '#0055ff' }
   ];
 };
 
@@ -617,6 +642,54 @@ export default function App() {
     });
   };
 
+  const rotateTeam = (teamType: 'attacker' | 'defender', angleDegrees: number) => {
+    setTokens(prev => {
+      const teamTokens = prev.filter(t => t.type === teamType);
+      if (teamTokens.length === 0) return prev;
+      
+      // Find the center of current team tokens
+      const sumX = teamTokens.reduce((sum, t) => sum + t.x, 0);
+      const sumY = teamTokens.reduce((sum, t) => sum + t.y, 0);
+      const cx = sumX / teamTokens.length;
+      const cy = sumY / teamTokens.length;
+      
+      const rad = (angleDegrees * Math.PI) / 180;
+      const cos = Math.cos(rad);
+      const sin = Math.sin(rad);
+      
+      return prev.map(t => {
+        if (t.type === teamType) {
+          const dx = t.x - cx;
+          const dy = t.y - cy;
+          const rx = dx * cos - dy * sin;
+          const ry = dx * sin + dy * cos;
+          
+          let newRot = (t.rotation + angleDegrees) % 360;
+          if (newRot < 0) newRot += 360;
+          
+          return {
+            ...t,
+            x: cx + rx,
+            y: cy + ry,
+            rotation: newRot
+          };
+        }
+        return t;
+      });
+    });
+    setNeedsHistoryPush(true);
+  };
+
+  const resetTeamSpawn = (teamType: 'attacker' | 'defender') => {
+    const initial = getInitialTokens(activeMapId, gameMode);
+    setTokens(prev => {
+      const initialTeam = initial.filter(t => t.type === teamType);
+      const otherTeam = prev.filter(t => t.type !== teamType);
+      return [...otherTeam, ...initialTeam];
+    });
+    setNeedsHistoryPush(true);
+  };
+
   const handleColorChange = (newColor: string) => {
     setColor(newColor);
     if (selectedItemIds.length > 0) {
@@ -989,6 +1062,8 @@ export default function App() {
         showLines={showLines}
         setShowLines={setShowLines}
         gameMode={gameMode}
+        onRotateTeam={rotateTeam}
+        onResetTeamSpawn={resetTeamSpawn}
       />}
       
       {/* Interactive Map Area */}

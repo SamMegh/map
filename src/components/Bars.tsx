@@ -177,10 +177,9 @@ export function TopBar({
       </div>
     );
   return (
-    <div className="absolute top-0 left-0 w-full z-20 flex justify-between p-2 pointer-events-none">
-
-      <div className="flex flex-col gap-2 pointer-events-auto">
-        <div className="flex gap-4 items-center">
+    <div className="absolute top-0 left-0 w-full z-20 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-between flex-col p-2 pointer-events-none">
+      <div className="col-span-1  w-full  lg:w-fit   pointer-events-auto">
+        <div className="flex gap-4 items-center justify-between lg:justify-normal  bg-black/60 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1 shadow-lg">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-black dark:bg-white rounded flex items-center justify-center">
               <span className="text-white dark:text-black font-bold text-xs">
@@ -192,7 +191,7 @@ export function TopBar({
             </span>
           </div>
 
-          <div className="hidden lg:flex items-center gap-1.5 text-sm text-neutral-300 font-medium bg-black/40 backdrop-blur rounded-lg px-3 py-1.5 border border-white/10">
+          <div className="flex items-center gap-1.5 text-sm text-neutral-300 font-medium px-3 ">
             <Gamepad2 className="w-4 h-4" />
             {games && onGameChange ? (
               <select
@@ -264,7 +263,7 @@ export function TopBar({
       </div>
 
       {/* Frame Timeline (Top Center) */}
-      <div className="absolute top-2 left-1 right-1 w-fit place-self-center pointer-events-auto">
+      <div className="col-span-1 w-full  lg:w-fit place-self-center pointer-events-auto">
         <div className="flex items-center gap-2 bg-black/60 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1 shadow-lg">
           <Tooltip content="Play Animation" side="bottom">
             <button
@@ -344,7 +343,7 @@ export function TopBar({
         </div>
       </div>
 
-      <div className="flex gap-2 pointer-events-auto items-start">
+      <div className="col-span-1  flex gap-2 pointer-events-auto items-start">
         <div className="flex bg-black/40 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1 gap-1">
           <Tooltip content="Undo (Ctrl+Z)" side="bottom">
             <button
@@ -392,27 +391,6 @@ export function TopBar({
             </button>
           </Tooltip>
         </div>
-
-        {autoSaveFrequency && setAutoSaveFrequency && (
-          <div className="flex items-center gap-1.5 text-xs text-neutral-300 font-medium bg-black/40 backdrop-blur rounded-lg px-2 py-1.5 border border-white/10">
-            <span>Auto-save:</span>
-            <select
-              value={autoSaveFrequency}
-              onChange={(e) => setAutoSaveFrequency(e.target.value as any)}
-              className="bg-transparent border-none text-blue-400 outline-none cursor-pointer"
-            >
-              <option value="frequent" className="text-black">
-                Frequent
-              </option>
-              <option value="significant" className="text-black">
-                Significant
-              </option>
-              <option value="off" className="text-black">
-                Off
-              </option>
-            </select>
-          </div>
-        )}
 
         <div className="flex bg-black/40 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1 gap-1">
           <Tooltip content="Take Snapshot" side="bottom">
@@ -521,7 +499,7 @@ export function BottomBar({
       </div>
     );
   return (
-    <div className="absolute bottom-2 left-0 w-full z-20 flex justify-between px-2 pointer-events-none">
+    <div className="absolute bottom-2 left-0  z-20 flex w-full   px-2 pointer-events-none">
       <div className="flex gap-2 pointer-events-auto items-end relative">
         <div className="flex gap-1 bg-black/40 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1 flex-wrap max-w-md">
           {supportedModes.includes("SND") && (
@@ -589,26 +567,9 @@ export function BottomBar({
             </button>
           )}
         </div>
-
-        {/* {gameMode === "SND" && (
-          <div className="flex gap-1 bg-black/40 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1">
-            <div
-              draggable
-              onDragStart={(e) => {
-                e.dataTransfer.setData("token_type", "bomb");
-              }}
-              className="w-8 h-8 flex items-center justify-center cursor-grab active:cursor-grabbing hover:bg-white/10 rounded p-1"
-              title="Bomb"
-            >
-              <div className="w-5 h-5 rounded bg-red-600 border border-red-800 flex items-center justify-center text-[8px] font-bold text-white shadow-md">
-                BOMB
-              </div>
-            </div>
-          </div>
-        )} */}
       </div>
 
-      <div className="flex gap-2 pointer-events-auto items-end pr-22">
+      <div className="flex gap-2 pointer-events-auto items-end mx-auto px-4">
         <div className="flex gap-1 bg-black/40 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1">
           <Tooltip content="Keyboard Shortcuts" side="bottom">
             <button

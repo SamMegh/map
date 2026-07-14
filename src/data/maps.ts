@@ -65,12 +65,12 @@ export const defaultMaps: MapData[] = [
       team1: {
         x: 0.83,
         y: 1.74,
-        rotation: 180,
+        rotation: -90,
       },
       team2: {
         x: 1.1,
         y: 0.18,
-        rotation: 180,
+        rotation: -90,
       },
     },
   },
@@ -135,12 +135,12 @@ export const defaultMaps: MapData[] = [
     teams: ["Black Ops", "CDP"],
     address: "Cuba",
     supportedModes: ["SND", "HP", "DOM", "CTL", "LINEUPS"],
-    objectives: {
+       objectives: {
       SND_A: { x: 0.62, y: 0.87 },
       SND_B: { x: 0.62, y: 0.23 },
-      HP_P1: { x: 0.43, y: 0.43 },
-      HP_P2: { x: 0.415, y: 0.13 },
-      HP_P3: { x: 0.626, y: 0.58 },
+      HP_P1: { x: 0.56, y: 0.54 },
+      HP_P2: { x: 0.45, y: 0.6 },
+      HP_P3: { x: 0.74, y: 0.66 },
       DOM_A: { x: 0.43071021274542937, y: 0.4702203620131158 },
       DOM_B: { x: 0.5493694823676977, y: 0.6235949401087129 },
       DOM_C: { x: 0.6863926865743646, y: 0.6059945786879067 },

@@ -17,6 +17,8 @@ interface SidebarRightProps {
   showLines: boolean;
   setShowLines: (show: boolean) => void;
   gameMode?: string;
+  onRotateTeam?: (teamType: 'attacker' | 'defender', angleDegrees: number) => void;
+  onResetTeamSpawn?: (teamType: 'attacker' | 'defender') => void;
 }
 
 const COLORS = [
@@ -37,7 +39,9 @@ export function SidebarRight({
   setShowMapObjectives,
   showLines,
   setShowLines,
-  gameMode
+  gameMode,
+  onRotateTeam,
+  onResetTeamSpawn
 }: SidebarRightProps) {
   const [isMinimized, setIsMinimized] = useState(false);
 
@@ -108,7 +112,7 @@ export function SidebarRight({
               onDragStart={(e) => onDragStart(e, 'attacker')}
               className="w-6 h-6 flex items-center justify-center cursor-grab active:cursor-grabbing hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded p-1"
             >
-              <div className="w-0 h-0 border-l-[8px] border-r-[8px] border-t-[12px] border-l-transparent border-r-transparent border-t-red-600 drop-shadow-md"></div>
+              <div className="w-0 h-0 border-l-8 border-r-8 border-t-12 border-l-transparent border-r-transparent border-t-red-600 drop-shadow-md"></div>
             </div>
           </Tooltip>
           
@@ -118,7 +122,7 @@ export function SidebarRight({
               onDragStart={(e) => onDragStart(e, 'defender')}
               className="w-6 h-6 flex items-center justify-center cursor-grab active:cursor-grabbing hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded p-1"
             >
-              <div className="w-0 h-0 border-l-[8px] border-r-[8px] border-b-[12px] border-l-transparent border-r-transparent border-b-blue-600 drop-shadow-md"></div>
+              <div className="w-0 h-0 border-l-8 border-r-8 border-b-12 border-l-transparent border-r-transparent border-b-blue-600 drop-shadow-md"></div>
             </div>
           </Tooltip>
           
@@ -233,8 +237,69 @@ export function SidebarRight({
             <Building2 className="w-5 h-5" />
           </button>
         </Tooltip>
+
+        <div className="w-full h-px bg-neutral-200 dark:bg-neutral-800 my-1"></div>
+        
         </>}
       </div>
+        {/* Team Group Controls */}
+        <div className="flex flex-col   gap-2 w-full text-center px-3 py-3 bg-white/95 dark:bg-neutral-900/95 backdrop-blur border border-neutral-200 dark:border-neutral-800 rounded-lg p-2 shadow-xl    pointer-events-auto">
+          <span className="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">Group Rotations</span>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between gap-1">
+              <span className="text-[10px] font-bold text-red-500">T1:</span>
+              <div className="flex gap-1">
+                <button 
+                  onClick={() => onRotateTeam?.('attacker', -15)} 
+                  className="px-1.5 py-0.5 text-[9px] bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 rounded hover:bg-red-200 font-bold"
+                  title="Rotate Attacker Box Counter-Clockwise"
+                >
+                  -15°
+                </button>
+                <button 
+                  onClick={() => onRotateTeam?.('attacker', 15)} 
+                  className="px-1.5 py-0.5 text-[9px] bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 rounded hover:bg-red-200 font-bold"
+                  title="Rotate Attacker Box Clockwise"
+                >
+                  +15°
+                </button>
+                <button 
+                  onClick={() => onResetTeamSpawn?.('attacker')} 
+                  className="px-1.5 py-0.5 text-[9px] bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded hover:bg-neutral-200 font-bold"
+                  title="Reset Attackers to Spawn"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+            <div className="flex items-center justify-between gap-1">
+              <span className="text-[10px] font-bold text-blue-500">T2:</span>
+              <div className="flex gap-1">
+                <button 
+                  onClick={() => onRotateTeam?.('defender', -15)} 
+                  className="px-1.5 py-0.5 text-[9px] bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-200 font-bold"
+                  title="Rotate Defender Box Counter-Clockwise"
+                >
+                  -15°
+                </button>
+                <button 
+                  onClick={() => onRotateTeam?.('defender', 15)} 
+                  className="px-1.5 py-0.5 text-[9px] bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-200 font-bold"
+                  title="Rotate Defender Box Clockwise"
+                >
+                  +15°
+                </button>
+                <button 
+                  onClick={() => onResetTeamSpawn?.('defender')} 
+                  className="px-1.5 py-0.5 text-[9px] bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded hover:bg-neutral-200 font-bold"
+                  title="Reset Defenders to Spawn"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   );
 }
