@@ -32,7 +32,7 @@ export function FloatingControlBar({
   showRight,
   setShowRight
 }: FloatingControlBarProps) {
-  const [position, setPosition] = useState({ x: 300, y: 150 });
+  const [position, setPosition] = useState({ x: 250, y: 150 });
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number } | null>(null);
   const barRef = useRef<HTMLDivElement>(null);

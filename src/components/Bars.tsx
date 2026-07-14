@@ -263,7 +263,7 @@ export function TopBar({
       </div>
 
       {/* Frame Timeline (Top Center) */}
-      <div className="col-span-1 w-full  lg:w-fit place-self-center pointer-events-auto">
+      <div className="col-span-1 w-full  lg:w-fit place-self-end xl:place-self-center pointer-events-auto">
         <div className="flex items-center gap-2 bg-black/60 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1 shadow-lg">
           <Tooltip content="Play Animation" side="bottom">
             <button
@@ -343,7 +343,7 @@ export function TopBar({
         </div>
       </div>
 
-      <div className="col-span-1  flex gap-2 pointer-events-auto items-start">
+      <div className="col-span-1  flex gap-2 pointer-events-auto items-end justify-end xl:place-self-end w-full lg:w-fit ">
         <div className="flex bg-black/40 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1 gap-1">
           <Tooltip content="Undo (Ctrl+Z)" side="bottom">
             <button
@@ -569,7 +569,7 @@ export function BottomBar({
         </div>
       </div>
 
-      <div className="flex gap-2 pointer-events-auto items-end mx-auto px-4">
+      <div className="flex gap-2 pointer-events-auto items-end md:mx-auto px-4">
         <div className="flex gap-1 bg-black/40 text-neutral-300 backdrop-blur rounded-lg border border-white/10 p-1">
           <Tooltip content="Keyboard Shortcuts" side="bottom">
             <button
